@@ -33,9 +33,13 @@ namespace PAC.WebAPI
         }
 
         [HttpGet]
-        public ActionResult GetAllStudent()
+        public ActionResult GetAllStudent([FromQuery] int? age)
         {
-            IEnumerable<Student> students = service.GetStudents();
+            IEnumerable<Student> students;
+            if(age != null)
+                students = service.GetStudentAgeFilter(age.Value);
+            else
+                students = service.GetStudents();
             if(students.Count() == 0)
                 return NoContent();
             return  Ok(students);
