@@ -25,6 +25,7 @@ namespace PAC.WebAPI
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(AuthorizationFilter)) ]
         public ActionResult CreateStudent([FromBody] Student student)
         {
             service.InsertStudents(student);
