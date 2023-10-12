@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using PAC.BusinessLogic;
 using PAC.Domain;
 using PAC.IBusinessLogic;
 using PAC.IDataAccess;
@@ -16,11 +17,18 @@ namespace PAC.WebAPI
     public class StudentController : ControllerBase
     {
 
-        private readonly IStudentsRepository<Student> repository;
+        private readonly StudentLogic service;
 
-        public StudentController(IStudentsRepository<Student> repository)
+        public StudentController(StudentLogic service)
         {
-            this.repository = repository;
+            this.service = service;
+        }
+
+        [HttpPost]
+        public ActionResult CreateStudent([FromBody] Student student)
+        {
+            service.InsertStudents(student);
+            return new ObjectResult(student) { StatusCode = 201 };
         }
     }
 }
