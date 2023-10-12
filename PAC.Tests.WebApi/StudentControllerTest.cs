@@ -13,7 +13,7 @@ using PAC.BusinessLogic;
 [TestClass]
 public class StudentControllerTest
 {
-        private readonly Mock<StudentLogic> _studentServiceMock = new Mock<StudentLogic>(MockBehavior.Strict);
+        private readonly Mock<IStudentLogic> _studentServiceMock = new Mock<IStudentLogic>(MockBehavior.Strict);
 
         private StudentController controller;
 
@@ -22,9 +22,14 @@ public class StudentControllerTest
         {
                 controller = new StudentController(_studentServiceMock.Object);
         }
-
-        public void createStudent ()
+        
+        [TestMethod]
+        public void CreateStudent ()
         {
-                Assert.Fail();
+                _studentServiceMock.Setup(x => x.InsertStudents(It.IsAny<Student>()));
+                controller.CreateStudent(new Student() {
+                        Name = "Test"
+                });
+                _studentServiceMock.VerifyAll();
         }
 }

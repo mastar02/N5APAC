@@ -17,9 +17,9 @@ namespace PAC.WebAPI
     public class StudentController : ControllerBase
     {
 
-        private readonly StudentLogic service;
+        private readonly IStudentLogic service;
 
-        public StudentController(StudentLogic service)
+        public StudentController(IStudentLogic service)
         {
             this.service = service;
         }
