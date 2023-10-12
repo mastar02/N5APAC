@@ -8,18 +8,19 @@ using PAC.Domain;
 using PAC.WebAPI;
 using Microsoft.AspNetCore.Mvc;
 using PAC.IDataAccess;
+using PAC.BusinessLogic;
 
 [TestClass]
 public class StudentControllerTest
 {
-        private readonly Mock<IStudentsRepository<Student>> _studentRepositoryMock = new Mock<IStudentsRepository<Student>>(MockBehavior.Strict);
+        private readonly Mock<StudentLogic> _studentServiceMock = new Mock<StudentLogic>(MockBehavior.Strict);
 
         private StudentController controller;
 
         [TestInitialize]
         public void InitTest()
         {
-                controller = new StudentController(_studentRepositoryMock.Object);
+                controller = new StudentController(_studentServiceMock.Object);
         }
 
         public void createStudent ()
