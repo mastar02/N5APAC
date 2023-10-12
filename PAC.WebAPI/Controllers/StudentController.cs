@@ -13,7 +13,7 @@ using PAC.WebAPI.Filters;
 namespace PAC.WebAPI
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("student")]
     public class StudentController : ControllerBase
     {
 
