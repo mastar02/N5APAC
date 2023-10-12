@@ -30,5 +30,23 @@ namespace PAC.WebAPI
             service.InsertStudents(student);
             return new ObjectResult(student) { StatusCode = 201 };
         }
+
+        [HttpGet]
+        public ActionResult GetAllStudent()
+        {
+            IEnumerable<Student> students = service.GetStudents();
+            if(students.Count() == 0)
+                return NoContent();
+            return  Ok(students);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetStudentById([FromRoute] int id)
+        {
+            Student? student = service.GetStudentById(id);
+            if(student == null)
+                return NotFound();
+            return  Ok(student);
+        }
     }
 }
